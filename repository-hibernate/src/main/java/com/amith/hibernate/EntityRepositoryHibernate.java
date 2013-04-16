@@ -12,10 +12,26 @@ import com.amith.domain.InstanceFactory;
  */
 public class EntityRepositoryHibernate extends AbstractEntityRepository {
 
+	private SessionFactory sessionFactory;
+	
+	public EntityRepositoryHibernate() {
+	}
+
+	public EntityRepositoryHibernate(SessionFactory sessionFactory) {
+		super();
+		this.sessionFactory = sessionFactory;
+	}
+	
+	public SessionFactory getSessionFactory() {
+		if (sessionFactory == null) {
+			sessionFactory = InstanceFactory.getInstance(SessionFactory.class);
+		}
+		return sessionFactory;
+	}
+	
 	@Override
 	protected Session getSession() {
-		SessionFactory sessionFactory = InstanceFactory.getInstance(SessionFactory.class);
-		return sessionFactory.getCurrentSession();
+		return getSessionFactory().getCurrentSession();
 	}
 
 }
