@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * 抽象实体类，可作为所有领域实体的基类，提供ID和乐观锁版本属性。
  * 
@@ -73,12 +76,25 @@ public abstract class AbstractEntity implements Entity {
 	}
 
 	@Override
-	public abstract int hashCode();
+	public int hashCode() {
+		return new HashCodeBuilder().append(getId()).hashCode();
+	}
 
 	@Override
-	public abstract boolean equals(Object other);
+	public  boolean equals(Object other) {
+		if (this == other) {
+			return true;
+		}
+		if (!(other instanceof AbstractEntity)) {
+			return false;
+		}
+		AbstractEntity that = (AbstractEntity) other;
+		return new EqualsBuilder().append(getId(), that.getId()).isEquals();
+	}
 
 	@Override
-	public abstract String toString();
+	public String toString() {
+		return getId();
+	}
 
 }
