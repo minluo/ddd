@@ -1,6 +1,7 @@
 package com.amith.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * 测试实体
@@ -19,6 +20,13 @@ public class TestEntity extends AbstractEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+	public TestEntity(String text) {
+		this.text = text;
+	}
+	
+	public TestEntity() {
+	}
 
 	@Override
 	public boolean equals(Object other) {
@@ -30,5 +38,10 @@ public class TestEntity extends AbstractEntity {
 		}
 		TestEntity that = (TestEntity) other;
 		return new EqualsBuilder().append(getText(), that.getText()).isEquals();
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(getText()).hashCode();
 	}
 }
