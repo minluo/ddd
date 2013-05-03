@@ -13,7 +13,7 @@ public class AbstractEntityTest {
 		
 		TestEntity testEntity = new TestEntity();
 		TestEntity testEntity2 = new TestEntity();
-		assertFalse(testEntity.equals(testEntity2));
+		assertTrue(testEntity.equals(testEntity2));
 	}
 	
 }
