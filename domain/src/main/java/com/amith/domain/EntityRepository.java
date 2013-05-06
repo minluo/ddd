@@ -2,6 +2,7 @@ package com.amith.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 仓储访问接口。用于存取和查询数据库的实体。
@@ -45,4 +46,25 @@ public interface EntityRepository {
 	 * @return 符合条件的实体集合
 	 */
 	<T extends Entity> List<T> findAll(Class<T> clazz);
+	
+	/**
+	 * 根据命名查询和指定参数从仓储查询符合条件的结果
+	 * @param <T> 元素类型
+	 * @param queryName 命名查询的名字
+	 * @param params 查询参数
+	 * @param resultClass 目标对象类
+	 * @return 符合查询条件的实体集合
+	 */
+	<T> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass);
+
+	/**
+	 * 根据命名查询和指定参数从仓储查询符合条件的结果
+	 * @param <T> 元素类型
+	 * @param queryName 命名查询的名字
+	 * @param params 查询参数
+	 * @param resultClass 目标对象类
+	 * @return 符合查询条件的实体集合
+	 */
+	<T> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass);
+	
 }
