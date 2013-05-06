@@ -8,8 +8,12 @@ import java.io.Serializable;
  * @author amith
  * 
  */
-public interface Entity {
+public interface Entity extends Serializable {
 
+	/**
+	 * 实体唯一标识
+	 * @return 实体ID
+	 */
 	Serializable getId();
 
 }

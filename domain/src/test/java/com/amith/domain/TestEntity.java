@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @author amith
  * 
  */
+@SuppressWarnings("serial")
 public class TestEntity extends AbstractEntity {
 
 	private String text;

@@ -11,8 +11,10 @@ import javax.persistence.MappedSuperclass;
  *
  */
 @MappedSuperclass
-public class AggregateRootEntity extends AbstractEntity {
+public abstract class AggregateRootEntity extends AbstractEntity {
 
+	private static final long serialVersionUID = 1L;
+	
 	private static EntityRepository repository;
 
 	public static EntityRepository getRepository() {

@@ -6,6 +6,7 @@ import java.util.Set;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+@SuppressWarnings("serial")
 public class AbstractEntityTest {
 
 	@Test
