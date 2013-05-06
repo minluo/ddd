@@ -35,6 +35,10 @@ public abstract class AggregateRootEntity extends AbstractEntity {
 	public void remove() {
 		getRepository().remove(this);
 	}
+	
+	public void update() {
+		getRepository().update(this);
+	}
 
 	public static <T extends Entity> T get(Class<T> clazz, Serializable id) {
 		return getRepository().get(clazz, id);

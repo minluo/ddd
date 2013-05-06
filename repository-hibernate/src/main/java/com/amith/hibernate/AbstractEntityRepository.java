@@ -12,16 +12,17 @@ import com.amith.domain.EntityRepository;
 
 /**
  * domain层仓储接口的Hibernate实现
+ * 
  * @author amith
- *
+ * 
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractEntityRepository implements EntityRepository {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EntityRepository.class);
-	
+
 	protected abstract Session getSession();
-	
+
 	public <T extends Entity> T save(T entity) {
 		getSession().save(entity);
 		LOGGER.info("create a entity: " + entity.getClass() + "/" + entity.getId() + ".");
@@ -31,6 +32,11 @@ public abstract class AbstractEntityRepository implements EntityRepository {
 	public void remove(Entity entity) {
 		getSession().delete(entity);
 		LOGGER.info("remove a entity: " + entity.getClass() + "/" + entity.getId() + ".");
+	}
+	
+	public void update(Entity entity) {
+		getSession().update(entity);
+		LOGGER.info("update a entity: " + entity.getClass() + "/" + entity.getId() + ".");
 	}
 
 	public <T extends Entity> T get(Class<T> clazz, Serializable id) {

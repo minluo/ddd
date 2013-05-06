@@ -11,7 +11,7 @@ import java.util.List;
 public interface EntityRepository {
 
 	/**
-	 * 将实体保存或更新到仓储
+	 * 将实体保存到仓储
 	 * @param entity 要存储的实体
 	 * @return
 	 */
@@ -22,6 +22,12 @@ public interface EntityRepository {
 	 * @param entity 要删除的实体
 	 */
 	void remove(Entity entity);
+	
+	/**
+	 * 将实体更新到仓储
+	 * @param entity
+	 */
+	void update(Entity entity);
 	
 	/**
 	 * 从仓储获取指定类型、指定ID的实体
