@@ -2,8 +2,9 @@ package com.amith;
 
 /**
  * Ioc异常。预防Ioc实例提供者的实现类出现异常
+ * 
  * @author amith
- *
+ * 
  */
 public class IocException extends RuntimeException {
 
@@ -23,5 +24,5 @@ public class IocException extends RuntimeException {
 	public IocException(String message, Throwable cause) {
 		super(message, cause);
 	}
-	
+
 }
