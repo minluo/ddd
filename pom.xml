@@ -241,7 +241,9 @@
 	<modules>
 	    <module>domain</module>
 	    <module>repository-hibernate</module>
+	    <module>repository-jdbc</module>
 	    <module>provider-spring</module>
+	    <module>test</module>
 	</modules>
 	
 </project>
