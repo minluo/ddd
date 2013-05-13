@@ -12,6 +12,7 @@ import com.amith.domain.Entity;
  * @author amith
  * 
  */
+@SuppressWarnings("rawtypes")
 public class QueryObject {
 
 	private Class entityClass;
