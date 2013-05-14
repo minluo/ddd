@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -7,4 +8,135 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>test</artifactId>
+	<packaging>jar</packaging>
+	
+	<dependencies>
+	    <dependency>
+	        <groupId>com.amith</groupId>
+	        <artifactId>domain</artifactId>
+	        <version>${project.parent.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>javax.persistence</groupId>
+	        <artifactId>persistence-api</artifactId>
+	    </dependency>
+	    
+	    <!-- TEST -->
+	    <dependency>
+	        <groupId>com.amith</groupId>
+	        <artifactId>repository-hibernate</artifactId>
+	        <version>${project.parent.version}</version>
+	        <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.amith</groupId>
+	        <artifactId>provider-spring</artifactId>
+	        <version>${project.parent.version}</version>
+	        <scope>test</scope>
+	    </dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>${jdbc.groupId}</groupId>
+			<artifactId>${jdbc.artifactId}</artifactId>
+			<version>${jdbc.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			    <groupId>org.unitils</groupId>
+			    <artifactId>unitils-core</artifactId>
+			    <version>${unitils.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.unitils</groupId>
+			    <artifactId>unitils-dbunit</artifactId>
+			    <version>${unitils.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.unitils</groupId>
+			    <artifactId>unitils-spring</artifactId>
+			    <version>${unitils.version}</version>
+			    <scope>test</scope>
+			</dependency>
+			<dependency>
+			    <groupId>org.unitils</groupId>
+			    <artifactId>unitils-orm</artifactId>
+			    <version>${unitils.version}</version>
+			    <scope>test</scope>
+			</dependency>
+		
+	</dependencies>
+	
+	<properties>
+		
+		<unitils.version>3.3</unitils.version>
+	
+	    <!-- DATABASE -->
+		<db.type>h2</db.type>
+		<db.host>localhost</db.host>
+		<db.name>test</db.name>
+		<dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
+		<dbunit.dataTypeFactoryName>org.dbunit.ext.h2.H2DataTypeFactory</dbunit.dataTypeFactoryName>
+		<jdbc.groupId>com.h2database</jdbc.groupId>
+		<jdbc.artifactId>h2</jdbc.artifactId>
+		<jdbc.version>1.3.171</jdbc.version>
+		<jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
+		<jdbc.url><![CDATA[jdbc:h2:mem:testdb]]></jdbc.url>
+		<jdbc.username>sa</jdbc.username>
+		<jdbc.password/>
+		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+		<hibernate.query.substitutions>true 'Y', false 'N'</hibernate.query.substitutions>
+		<hibernate.cache.provider_class>org.hibernate.cache.EhCacheProvider</hibernate.cache.provider_class>
+		<hibernate.cache.use_query_cache>true</hibernate.cache.use_query_cache>
+		<hibernate.cache.use_second_level_cache>true</hibernate.cache.use_second_level_cache>
+		<hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+		<hibernate.show_sql>true</hibernate.show_sql>
+		<hibernate.format_sql>true</hibernate.format_sql>
+		<hibernate.connection.autocommit>false</hibernate.connection.autocommit>
+		<hibernate.use.sql.comments>true</hibernate.use.sql.comments>
+		<h2.activeByDefault>false</h2.activeByDefault>
+	</properties>
+	
 </project>
