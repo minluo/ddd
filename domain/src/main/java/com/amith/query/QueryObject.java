@@ -19,6 +19,9 @@ public class QueryObject {
 	
 	private Set<QueryCriterion> criterions = new HashSet<QueryCriterion>();
 	
+	private int firstResult;
+	private int maxResults;
+	
 	public static <T extends Entity> QueryObject create(Class<T> entityClass) {
 		return new QueryObject(entityClass);
 	}
@@ -42,6 +45,22 @@ public class QueryObject {
 
 	private void addCriterion(QueryCriterion criterion) {
 		criterions.add(criterion);
+	}
+
+	public int getFirstResult() {
+		return firstResult;
+	}
+
+	public void setFirstResult(int firstResult) {
+		this.firstResult = firstResult;
+	}
+
+	public int getMaxResults() {
+		return maxResults;
+	}
+
+	public void setMaxResults(int maxResults) {
+		this.maxResults = maxResults;
 	}
 	
 }

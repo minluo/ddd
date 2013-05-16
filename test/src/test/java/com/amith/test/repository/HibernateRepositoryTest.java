@@ -1,58 +1,85 @@
 package com.amith.test.repository;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-import com.amith.domain.Entity;
+
 import com.amith.test.AbstractIntegrationTest;
 import com.amith.test.domain.Organization;
 
 public class HibernateRepositoryTest extends AbstractIntegrationTest {
 
 	@Test
-	public void testSaveAndRemove() {
+	public void testSave() {
 		Organization organization = instanceOrganization();
-		assertEquals(1, Organization.findAll(Organization.class).size());
-		organization.remove();
-		assertEquals(0, Organization.findAll(Organization.class).size());
+		assertEquals(1, getOrganizationDataQuantity());
+		removeOrganization(organization);
+		assertEquals(0, getOrganizationDataQuantity());
 	}
 
-	public void update(Entity entity) {
-		// TODO Auto-generated method stub
+	@Test
+	public void testRemove() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, getOrganizationDataQuantity());
+		organization.remove();
+		assertEquals(0, getOrganizationDataQuantity());
+	}
+	
+	@Test
+	public void testUpdate() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, getOrganizationDataQuantity());
+		organization.setName(ORGANIZATION_NAME2);
+		organization.update();
+		assertEquals(1, getOrganizationDataQuantity());
+		Organization updateOrganization = Organization.findAll(Organization.class).get(0);
+		assertEquals(ORGANIZATION_NAME2, updateOrganization.getName());
+		assertEquals(ORGANIZATION_NAME2, organization.getName());
+		removeOrganization(organization);
+	}
+
+	@Test
+	public void testUpdate2() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, getOrganizationDataQuantity());
+		organization.setName(ORGANIZATION_NAME2);
+		organization.save();
+		assertEquals(1, getOrganizationDataQuantity());
+		Organization updateOrganization = Organization.findAll(Organization.class).get(0);
+		assertEquals(ORGANIZATION_NAME2, updateOrganization.getName());
+		assertEquals(ORGANIZATION_NAME2, organization.getName());
+		removeOrganization(organization);
+	}
+	
+	@Test
+	public void testGet() {
+		Organization organization = instanceOrganization();
+		Organization organization2 = Organization.get(Organization.class, organization.getId());
+		assertEquals(organization, organization2);
+		removeOrganization(organization);
+	}
+
+	@Test
+	public void testFindAll() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, getOrganizationDataQuantity());
+		Organization organization2 = instanceOrganization();
+		assertEquals(2, getOrganizationDataQuantity());
+		removeOrganization(organization);
+		removeOrganization(organization2);
+	}
+
+	@Test
+	public void testFindByNameQueryConditionParamIsList() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, Organization.findAll().size());
+		assertEquals(1, Organization.findByName(ORGANIZATION_NAME).size());
+		removeOrganization(organization);
+	}
+
+	@Test
+	public void testFindByNameQueryConditionParamIsMap() {
 		
 	}
 
-	public <T extends Entity> T get(Class<T> clazz, Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends Entity> List<T> findAll(Class<T> clazz) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Organization createOrganization() {
-		return new Organization("amith");
-	}
-	
-	private Organization instanceOrganization() {
-		Organization organization = createOrganization();
-		organization.save();
-		return organization;
-	}
-	
 }

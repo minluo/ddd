@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.amith.query.QueryObject;
+
 /**
  * 仓储访问接口。用于存取和查询数据库的实体。
  * @author amith
@@ -55,7 +57,7 @@ public interface EntityRepository {
 	 * @param resultClass 目标对象类
 	 * @return 符合查询条件的实体集合
 	 */
-	<T> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass);
+	<T extends Entity> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass);
 
 	/**
 	 * 根据命名查询和指定参数从仓储查询符合条件的结果
@@ -65,6 +67,42 @@ public interface EntityRepository {
 	 * @param resultClass 目标对象类
 	 * @return 符合查询条件的实体集合
 	 */
-	<T> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass);
+	<T extends Entity> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass);
+	
+	/**
+	 * 根据条件查询
+	 * @param <T> 元素类型
+	 * @param queryObject 查询对象
+	 * @return
+	 */
+	<T extends Entity> List<T> find(QueryObject queryObject);
+	
+	/**
+	 * 根据条件查询获取单一结果
+	 * @param <T> 元素类型
+	 * @param queryObject查询对象
+	 * @return
+	 */
+	<T extends Entity> T getSingleResult(QueryObject queryObject);
+	
+	/**
+	 * 根据查询语句和指定的参数从仓储中查询符合条件的结果
+	 * @param <T> 元素类型
+	 * @param queryString 访问仓储的DSL语句，采用JPA QL的语义，但不一定用JPA实现
+	 * @param params 查询参数，以定位参数的形式代入queryString中的问号占位符
+	 * @param resultClass 目标对象类
+	 * @return
+	 */
+	<T extends Entity> List<T> find(String queryString, Object[] params, Class<T> resultClass);
+
+	/**
+	 * 根据查询语句和指定的参数从仓储中查询符合条件的结果
+	 * @param <T> 元素类型
+	 * @param queryString 访问仓储的DSL语句，采用JPA QL的语义，但不一定用JPA实现
+	 * @param params 查询参数，以命名参数的形式代入queryString中的占位符
+	 * @param resultClass 目标对象类
+	 * @return
+	 */
+	<T extends Entity> List<T> find(String queryString, Map<String, Object> params, Class<T> resultClass);
 	
 }
