@@ -78,6 +78,24 @@ public class Organization extends AggregateRootEntity {
 		child.save();
 	}
 
+	public void createChild2(Organization child) {
+		int right = getRightValue() - 1;
+		List<Organization> organizations = getRepository().find(QueryObject.create(Organization.class).gt("rightValue", right));
+		for (Organization each : organizations) {
+			each.setRightValue(each.getRightValue() + 2);
+			each.save();
+		}
+		organizations = getRepository().find(QueryObject.create(Organization.class).gt("leftValue", right));
+		for (Organization each : organizations) {
+			each.setLeftValue(each.getLeftValue() + 2);
+			each.save();
+		}
+		child.setLeftValue(right + 1);
+		child.setRightValue(right + 2);
+		child.setLevel(getLevel() + 1);
+		child.save();
+	}
+	
 	public boolean haveChildren() {
 		return getRightValue() - getLeftValue() > 1;
 	}
@@ -87,16 +105,33 @@ public class Organization extends AggregateRootEntity {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+	public Organization obtainParent2() {
+		List<Organization> list = getRepository().find(QueryObject.create(Organization.class).lt("leftValue", getLeftValue()).gt("rightValue", getRightValue()).eq("level", getLevel() - 1));
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
 	public List<Organization> obtainAllParent() {
 		return getRepository().findByNameQuery("findElementAllParent", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
+	}
+	
+	public List<Organization> obtainAllParent2() {
+		return getRepository().find(QueryObject.create(Organization.class).lt("leftValue", getLeftValue()).gt("rightValue", getRightValue()));
 	}
 	
 	public List<Organization> obtainChildRen() {
 		return getRepository().findByNameQuery("findElementChildRen", new Object[] { getLeftValue(), getRightValue(), getLevel() + 1 }, Organization.class);
 	}
 	
+	public List<Organization> obtainChildRen2() {
+		return getRepository().find(QueryObject.create(Organization.class).lt("rightValue", getRightValue()).gt("leftValue", getLeftValue()).eq("level", getLevel() + 1));
+	}
+	
 	public List<Organization> obtainAllChildRen() {
 		return getRepository().findByNameQuery("findElementAllChildRen", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
+	}
+	
+	public List<Organization> obtainAllChildRen2() {
+		return getRepository().find(QueryObject.create(Organization.class).lt("rightValue", getRightValue()).gt("leftValue", getLeftValue()));
 	}
 	
 	public String getName() {

@@ -37,8 +37,18 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		assertEquals(child.obtainParent(), organization);
 		assertTrue(organization.obtainChildRen().contains(child));
 		assertEquals(2, getOrganizationDataQuantity());
-		removeOrganization(organization);
-		removeOrganization(child);
+		removeOrganization(organization, child);
+	}
+	
+	@Test
+	public void testCreateChild2() {
+		Organization organization = instanceOrganization();
+		Organization child = new Organization(ORGANIZATION_NAME2);
+		organization.createChild2(child);
+		assertEquals(child.obtainParent(), organization);
+		assertTrue(organization.obtainChildRen().contains(child));
+		assertEquals(2, getOrganizationDataQuantity());
+		removeOrganization(organization, child);
 	}
 	
 	@Test
@@ -48,8 +58,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
 		assertTrue(organization.haveChildren());
-		removeOrganization(organization);
-		removeOrganization(child);
+		removeOrganization(organization, child);
 	}
 	
 	@Test
@@ -58,8 +67,16 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
 		assertEquals(child.obtainParent(), organization);
-		removeOrganization(organization);
-		removeOrganization(child);
+		removeOrganization(organization, child);
+	}
+	
+	@Test
+	public void testObtainParent2() {
+		Organization organization = instanceOrganization();
+		Organization child = new Organization(ORGANIZATION_NAME2);
+		organization.createChild(child);
+		assertEquals(child.obtainParent2(), organization);
+		removeOrganization(organization, child);
 	}
 	
 	@Test
@@ -71,9 +88,19 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization child2 = new Organization(ORGANIZATION_NAME2);
 		child.createChild(child2);
 		assertEquals(2, child2.obtainAllParent().size());
-		removeOrganization(organization);
-		removeOrganization(child);
-		removeOrganization(child2);
+		removeOrganization(organization, child, child2);
+	}
+	
+	@Test
+	public void testObtainAllParent2() {
+		Organization organization = instanceOrganization();
+		Organization child = new Organization(ORGANIZATION_NAME2);
+		organization.createChild(child);
+		assertEquals(1, child.obtainAllParent2().size());
+		Organization child2 = new Organization(ORGANIZATION_NAME2);
+		child.createChild(child2);
+		assertEquals(2, child2.obtainAllParent2().size());
+		removeOrganization(organization, child, child2);
 	}
 	
 	@Test
@@ -86,9 +113,20 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization child2 = new Organization(ORGANIZATION_NAME2);
 		child.createChild(child2);
 		assertFalse(organization.obtainChildRen().contains(child2));
-		removeOrganization(organization);
-		removeOrganization(child);
-		removeOrganization(child2);
+		removeOrganization(organization, child, child2);
+	}
+	
+	@Test
+	public void testObtainChildRen2() {
+		Organization organization = instanceOrganization();
+		Organization child = new Organization(ORGANIZATION_NAME2);
+		organization.createChild(child);
+		assertTrue(organization.obtainChildRen2().contains(child));
+		assertEquals(1, organization.obtainChildRen2().size());
+		Organization child2 = new Organization(ORGANIZATION_NAME2);
+		child.createChild(child2);
+		assertFalse(organization.obtainChildRen2().contains(child2));
+		removeOrganization(organization, child, child2);
 	}
 	
 	@Test
@@ -102,9 +140,21 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		child.createChild(child2);
 		assertTrue(organization.obtainAllChildRen().contains(child2));
 		assertEquals(2, organization.obtainAllChildRen().size());
-		removeOrganization(organization);
-		removeOrganization(child);
-		removeOrganization(child2);
+		removeOrganization(organization, child, child2);
+	}
+	
+	@Test
+	public void testObtainAllChildRen2() {
+		Organization organization = instanceOrganization();
+		Organization child = new Organization(ORGANIZATION_NAME2);
+		organization.createChild(child);
+		assertTrue(organization.obtainAllChildRen2().contains(child));
+		assertEquals(1, organization.obtainAllChildRen2().size());
+		Organization child2 = new Organization(ORGANIZATION_NAME2);
+		child.createChild(child2);
+		assertTrue(organization.obtainAllChildRen2().contains(child2));
+		assertEquals(2, organization.obtainAllChildRen2().size());
+		removeOrganization(organization, child, child2);
 	}
 	
 }

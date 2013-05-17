@@ -8,20 +8,20 @@ import com.amith.query.QueryCriterion;
 import com.amith.query.QueryException;
 
 /**
- * 相等条件
+ * 小于条件
  * 
  * @author amith
  * 
  */
-public class EqCriterion implements QueryCriterion {
+public class LtCriterion implements QueryCriterion {
 
 	private String propName;
 
-	private Object value;
+	private Comparable<?> value;
 
-	public EqCriterion(String propName, Object value) {
+	public LtCriterion(String propName, Comparable<?> value) {
 		if (StringUtils.isEmpty(propName)) {
-			throw new QueryException("EqCriterion propName is null!");
+			throw new QueryException("GtCriterion propName is null!");
 		}
 		this.propName = propName;
 		this.value = value;
@@ -31,29 +31,30 @@ public class EqCriterion implements QueryCriterion {
 		return propName;
 	}
 
-	public Object getValue() {
+	public Comparable<?> getValue() {
 		return value;
 	}
-
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof EqCriterion)) {
-			return false;
-		}
-		EqCriterion castOther = (EqCriterion) obj;
-		return new EqualsBuilder().append(this.getPropName(), castOther.getPropName()).append(getValue(), castOther.getValue()).isEquals();
-	}
-
+	
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17, 37).append(getPropName()).append(getValue()).toHashCode();
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof LtCriterion)) {
+			return false;
+		}
+		LtCriterion castOther = (LtCriterion) obj;
+		return new EqualsBuilder().append(getPropName(), castOther.getPropName()).append(getValue(), castOther.getValue()).isEquals();
+	}
+
+	@Override
 	public String toString() {
 		return getPropName() + " = " + getValue();
 	}
+
 }

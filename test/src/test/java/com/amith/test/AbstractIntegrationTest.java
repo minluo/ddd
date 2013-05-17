@@ -44,8 +44,10 @@ public abstract class AbstractIntegrationTest extends UnitilsJUnit4 {
 		return organization;
 	}
 	
-	protected void removeOrganization(Organization organization) {
-		organization.remove();
+	protected void removeOrganization(Organization... organizations) {
+		for (Organization each : organizations) {
+			each.remove();
+		}
 	}
 	
 	protected int getOrganizationDataQuantity() {

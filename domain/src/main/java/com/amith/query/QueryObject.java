@@ -35,6 +35,16 @@ public class QueryObject {
 		return this;
 	}
 	
+	public QueryObject gt(String propName, Comparable<?> value) {
+		addCriterion(CriterionFactory.gt(propName, value));
+		return this;
+	}
+	
+	public QueryObject lt(String propName, Comparable<?> value) {
+		addCriterion(CriterionFactory.lt(propName, value));
+		return this;
+	}
+	
 	public Class getEntityClass() {
 		return entityClass;
 	}
