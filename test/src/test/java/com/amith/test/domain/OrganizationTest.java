@@ -34,7 +34,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
-		assertEquals(child.obtainParent(), organization);
+		assertEquals(child.getParent(), organization);
 		assertTrue(organization.obtainChildRen().contains(child));
 		assertEquals(2, getOrganizationDataQuantity());
 		removeOrganization(organization, child);
@@ -45,7 +45,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild2(child);
-		assertEquals(child.obtainParent(), organization);
+		assertEquals(child.getParent(), organization);
 		assertTrue(organization.obtainChildRen().contains(child));
 		assertEquals(2, getOrganizationDataQuantity());
 		removeOrganization(organization, child);
@@ -66,7 +66,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
-		assertEquals(child.obtainParent(), organization);
+		assertEquals(child.getParent(), organization);
 		removeOrganization(organization, child);
 	}
 	
@@ -75,7 +75,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
-		assertEquals(child.obtainParent2(), organization);
+		assertEquals(child.getParent2(), organization);
 		removeOrganization(organization, child);
 	}
 	
@@ -84,10 +84,10 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
-		assertEquals(1, child.obtainAllParent().size());
+		assertEquals(1, child.getAllParent().size());
 		Organization child2 = new Organization(ORGANIZATION_NAME2);
 		child.createChild(child2);
-		assertEquals(2, child2.obtainAllParent().size());
+		assertEquals(2, child2.getAllParent().size());
 		removeOrganization(organization, child, child2);
 	}
 	
@@ -96,10 +96,10 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
-		assertEquals(1, child.obtainAllParent2().size());
+		assertEquals(1, child.getAllParent2().size());
 		Organization child2 = new Organization(ORGANIZATION_NAME2);
 		child.createChild(child2);
-		assertEquals(2, child2.obtainAllParent2().size());
+		assertEquals(2, child2.getAllParent2().size());
 		removeOrganization(organization, child, child2);
 	}
 	

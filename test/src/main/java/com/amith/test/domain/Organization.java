@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.amith.domain.AggregateRootEntity;
 import com.amith.query.QueryObject;
@@ -37,8 +38,10 @@ public class Organization extends AggregateRootEntity {
 
 	private int level;
 
+	@Column(name = "left_value")
 	private Integer leftValue;
 
+	@Column(name = "right_value")
 	private Integer rightValue;
 
 	public Organization(String name) {
@@ -100,37 +103,45 @@ public class Organization extends AggregateRootEntity {
 		return getRightValue() - getLeftValue() > 1;
 	}
 	
-	public Organization obtainParent() {
+	@Transient
+	public Organization getParent() {
 		List<Organization> list = getRepository().findByNameQuery("findElementParent", new Object[] { getLeftValue(), getRightValue(), getLevel() - 1 }, Organization.class);
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	public Organization obtainParent2() {
+	@Transient
+	public Organization getParent2() {
 		List<Organization> list = getRepository().find(QueryObject.create(Organization.class).lt("leftValue", getLeftValue()).gt("rightValue", getRightValue()).eq("level", getLevel() - 1));
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
-	public List<Organization> obtainAllParent() {
+	@Transient
+	public List<Organization> getAllParent() {
 		return getRepository().findByNameQuery("findElementAllParent", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
 	}
 	
-	public List<Organization> obtainAllParent2() {
+	@Transient
+	public List<Organization> getAllParent2() {
 		return getRepository().find(QueryObject.create(Organization.class).lt("leftValue", getLeftValue()).gt("rightValue", getRightValue()));
 	}
 	
-	public List<Organization> obtainChildRen() {
+	@Transient
+	public List<Organization> getChildRen() {
 		return getRepository().findByNameQuery("findElementChildRen", new Object[] { getLeftValue(), getRightValue(), getLevel() + 1 }, Organization.class);
 	}
 	
-	public List<Organization> obtainChildRen2() {
+	@Transient
+	public List<Organization> getChildRen2() {
 		return getRepository().find(QueryObject.create(Organization.class).lt("rightValue", getRightValue()).gt("leftValue", getLeftValue()).eq("level", getLevel() + 1));
 	}
 	
-	public List<Organization> obtainAllChildRen() {
+	@Transient
+	public List<Organization> getAllChildRen() {
 		return getRepository().findByNameQuery("findElementAllChildRen", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
 	}
 	
-	public List<Organization> obtainAllChildRen2() {
+	@Transient
+	public List<Organization> getAllChildRen2() {
 		return getRepository().find(QueryObject.create(Organization.class).lt("rightValue", getRightValue()).gt("leftValue", getLeftValue()));
 	}
 	
@@ -150,7 +161,6 @@ public class Organization extends AggregateRootEntity {
 		this.level = level;
 	}
 
-	@Column(name = "left_value")
 	public Integer getLeftValue() {
 		return leftValue;
 	}
@@ -159,7 +169,6 @@ public class Organization extends AggregateRootEntity {
 		this.leftValue = leftValue;
 	}
 
-	@Column(name = "right_value")
 	public Integer getRightValue() {
 		return rightValue;
 	}
