@@ -57,7 +57,7 @@ public interface EntityRepository {
 	 * @param resultClass 目标对象类
 	 * @return 符合查询条件的实体集合
 	 */
-	<T extends Entity> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass);
+	<T extends Entity> List<T> findByNamedQuery(String queryName, Object[] params, Class<T> resultClass);
 
 	/**
 	 * 根据命名查询和指定参数从仓储查询符合条件的结果
@@ -67,7 +67,7 @@ public interface EntityRepository {
 	 * @param resultClass 目标对象类
 	 * @return 符合查询条件的实体集合
 	 */
-	<T extends Entity> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass);
+	<T extends Entity> List<T> findByNamedQuery(String queryName, Map<String, Object> params, Class<T> resultClass);
 	
 	/**
 	 * 根据条件查询

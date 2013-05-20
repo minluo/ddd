@@ -57,7 +57,7 @@ public abstract class AbstractEntityRepository implements EntityRepository {
 	}
 
 	@Override
-	public <T extends Entity> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass) {
+	public <T extends Entity> List<T> findByNamedQuery(String queryName, Object[] params, Class<T> resultClass) {
 		Query query = getSession().getNamedQuery(queryName);
 		for (int i = 0; i < params.length; i++) {
 			query = query.setParameter(i, params[i]);
@@ -66,7 +66,7 @@ public abstract class AbstractEntityRepository implements EntityRepository {
 	}
 
 	@Override
-	public <T extends Entity> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass) {
+	public <T extends Entity> List<T> findByNamedQuery(String queryName, Map<String, Object> params, Class<T> resultClass) {
 		Query query = getSession().getNamedQuery(queryName);
 		for (String key : params.keySet()) {
 			query = query.setParameter(key, params.get(key));

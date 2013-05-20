@@ -52,11 +52,11 @@ public class Organization extends AggregateRootEntity {
 	}
 
 	public static List<Organization> findAll() {
-		return getRepository().findByNameQuery("findAll", new Object[] {}, Organization.class);
+		return getRepository().findByNamedQuery("findAll", new Object[] {}, Organization.class);
 	}
 
 	public static List<Organization> findByName(String name) {
-		return getRepository().findByNameQuery("findByName", new Object[] { name }, Organization.class);
+		return getRepository().findByNamedQuery("findByName", new Object[] { name }, Organization.class);
 	}
 
 	public static List<Organization> findByName2(String name) {
@@ -65,12 +65,12 @@ public class Organization extends AggregateRootEntity {
 	
 	public void createChild(Organization child) {
 		int right = getRightValue() - 1;
-		List<Organization> organizations = getRepository().findByNameQuery("findByRightValueGreaterThan", new Object[] { right }, Organization.class);
+		List<Organization> organizations = getRepository().findByNamedQuery("findByRightValueGreaterThan", new Object[] { right }, Organization.class);
 		for (Organization each : organizations) {
 			each.setRightValue(each.getRightValue() + 2);
 			each.save();
 		}
-		organizations = getRepository().findByNameQuery("findByLeftValueGreaterThan", new Object[] { right }, Organization.class);
+		organizations = getRepository().findByNamedQuery("findByLeftValueGreaterThan", new Object[] { right }, Organization.class);
 		for (Organization each : organizations) {
 			each.setLeftValue(each.getLeftValue() + 2);
 			each.save();
@@ -105,7 +105,7 @@ public class Organization extends AggregateRootEntity {
 	
 	@Transient
 	public Organization getParent() {
-		List<Organization> list = getRepository().findByNameQuery("findElementParent", new Object[] { getLeftValue(), getRightValue(), getLevel() - 1 }, Organization.class);
+		List<Organization> list = getRepository().findByNamedQuery("findElementParent", new Object[] { getLeftValue(), getRightValue(), getLevel() - 1 }, Organization.class);
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
@@ -117,7 +117,7 @@ public class Organization extends AggregateRootEntity {
 	
 	@Transient
 	public List<Organization> getAllParent() {
-		return getRepository().findByNameQuery("findElementAllParent", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
+		return getRepository().findByNamedQuery("findElementAllParent", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
 	}
 	
 	@Transient
@@ -127,7 +127,7 @@ public class Organization extends AggregateRootEntity {
 	
 	@Transient
 	public List<Organization> getChildRen() {
-		return getRepository().findByNameQuery("findElementChildRen", new Object[] { getLeftValue(), getRightValue(), getLevel() + 1 }, Organization.class);
+		return getRepository().findByNamedQuery("findElementChildRen", new Object[] { getLeftValue(), getRightValue(), getLevel() + 1 }, Organization.class);
 	}
 	
 	@Transient
@@ -137,7 +137,7 @@ public class Organization extends AggregateRootEntity {
 	
 	@Transient
 	public List<Organization> getAllChildRen() {
-		return getRepository().findByNameQuery("findElementAllChildRen", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
+		return getRepository().findByNamedQuery("findElementAllChildRen", new Object[] { getLeftValue(), getRightValue() }, Organization.class);
 	}
 	
 	@Transient

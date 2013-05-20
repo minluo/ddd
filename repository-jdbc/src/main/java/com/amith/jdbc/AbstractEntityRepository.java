@@ -40,13 +40,13 @@ public class AbstractEntityRepository implements EntityRepository {
 	}
 
 	@Override
-	public <T extends Entity> List<T> findByNameQuery(String queryName, Object[] params, Class<T> resultClass) {
+	public <T extends Entity> List<T> findByNamedQuery(String queryName, Object[] params, Class<T> resultClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T extends Entity> List<T> findByNameQuery(String queryName, Map<String, Object> params, Class<T> resultClass) {
+	public <T extends Entity> List<T> findByNamedQuery(String queryName, Map<String, Object> params, Class<T> resultClass) {
 		// TODO Auto-generated method stub
 		return null;
 	}
