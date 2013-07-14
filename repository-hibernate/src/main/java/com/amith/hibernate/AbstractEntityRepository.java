@@ -30,20 +30,20 @@ public abstract class AbstractEntityRepository implements EntityRepository {
 	@Override
 	public <T extends Entity> T save(T entity) {
 		getSession().save(entity);
-		LOGGER.info("create a entity: " + entity.getClass() + "/" + entity.getId() + ".");
+		LOGGER.info("创建实体: " + entity.getClass() + "/" + entity.getId() + ".");
 		return entity;
 	}
 
 	@Override
 	public void remove(Entity entity) {
 		getSession().delete(entity);
-		LOGGER.info("remove a entity: " + entity.getClass() + "/" + entity.getId() + ".");
+		LOGGER.info("删除实体: " + entity.getClass() + "/" + entity.getId() + ".");
 	}
 	
 	@Override
 	public void update(Entity entity) {
 		getSession().update(entity);
-		LOGGER.info("update a entity: " + entity.getClass() + "/" + entity.getId() + ".");
+		LOGGER.info("更新实体: " + entity.getClass() + "/" + entity.getId() + ".");
 	}
 	
 	@Override
