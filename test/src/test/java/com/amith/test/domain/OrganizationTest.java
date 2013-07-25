@@ -62,7 +62,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetParent() {
+	public void testGetParent() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -71,7 +71,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetParent2() {
+	public void testGetParent2() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -80,7 +80,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetAllParent() {
+	public void testGetAllParent() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -92,7 +92,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetAllParent2() {
+	public void testGetAllParent2() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -104,7 +104,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetChildRen() {
+	public void testGetChildRen() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -117,7 +117,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetChildRen2() {
+	public void testGetChildRen2() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -130,7 +130,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetAllChildRen() {
+	public void testGetAllChildRen() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -144,7 +144,7 @@ public class OrganizationTest extends AbstractIntegrationTest {
 	}
 	
 	@Test
-	public void testgetAllChildRen2() {
+	public void testGetAllChildRen2() {
 		Organization organization = instanceOrganization();
 		Organization child = new Organization(ORGANIZATION_NAME2);
 		organization.createChild(child);
@@ -157,4 +157,23 @@ public class OrganizationTest extends AbstractIntegrationTest {
 		removeOrganization(organization, child, child2);
 	}
 	
+	@Test
+	public void testFindByNameIsNull() {
+		Organization organization = instanceOrganization();
+		assertEquals(0, Organization.findByNameIsNull().size());
+		Organization test = new Organization();
+		test.save();
+		assertEquals(1, Organization.findByNameIsNull().size());
+		removeOrganization(organization, test);
+	}
+	
+	@Test
+	public void testFindByNameIsNotNull() {
+		Organization organization = instanceOrganization();
+		assertEquals(1, Organization.findByNameIsNotNull().size());
+		Organization test = new Organization();
+		test.save();
+		assertEquals(1, Organization.findByNameIsNotNull().size());
+		removeOrganization(organization, test);
+	}
 }

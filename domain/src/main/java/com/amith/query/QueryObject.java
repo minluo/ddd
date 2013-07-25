@@ -45,6 +45,16 @@ public class QueryObject {
 		return this;
 	}
 	
+	public QueryObject isNull(String propName) {
+		addCriterion(CriterionFactory.isNull(propName));
+		return this;
+	}
+	
+	public QueryObject isNotNull(String propName) {
+		addCriterion(CriterionFactory.isNotNull(propName));
+		return this;
+	}
+	
 	public Class getEntityClass() {
 		return entityClass;
 	}

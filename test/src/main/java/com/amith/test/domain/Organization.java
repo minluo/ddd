@@ -145,6 +145,14 @@ public class Organization extends AggregateRootEntity {
 		return getRepository().find(QueryObject.create(Organization.class).lt("rightValue", getRightValue()).gt("leftValue", getLeftValue()));
 	}
 	
+	public static List<Organization> findByNameIsNull() {
+		return getRepository().find(QueryObject.create(Organization.class).isNull("name"));
+	}
+	
+	public static List<Organization> findByNameIsNotNull() {
+		return getRepository().find(QueryObject.create(Organization.class).isNotNull("name"));
+	}
+	
 	public String getName() {
 		return name;
 	}

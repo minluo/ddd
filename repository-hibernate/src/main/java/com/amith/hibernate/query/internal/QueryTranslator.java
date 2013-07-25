@@ -9,6 +9,8 @@ import com.amith.query.QueryCriterion;
 import com.amith.query.QueryObject;
 import com.amith.query.criterion.EqCriterion;
 import com.amith.query.criterion.GtCriterion;
+import com.amith.query.criterion.IsNotNullCriterion;
+import com.amith.query.criterion.IsNullCriterion;
 import com.amith.query.criterion.LtCriterion;
 
 /**
@@ -84,6 +86,12 @@ public class QueryTranslator {
 			LtCriterion ltCriterion = (LtCriterion) queryCriterion;
 			params.add(ltCriterion.getValue());
 			return "o." + ltCriterion.getPropName() + " < ?";
+		} else if (queryCriterion instanceof IsNullCriterion) {
+			IsNullCriterion isNullCriterion = (IsNullCriterion) queryCriterion;
+			return "o." + isNullCriterion.getPropName() + " is null";
+		} else if (queryCriterion instanceof IsNotNullCriterion) {
+			IsNotNullCriterion isNotNullCriterion = (IsNotNullCriterion) queryCriterion;
+			return "o." + isNotNullCriterion.getPropName() + " is not null";
 		} 
 
 		throw new IllegalStateException("Not support criterion type: " + queryCriterion.getClass());
