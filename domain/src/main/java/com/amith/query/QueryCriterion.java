@@ -8,6 +8,10 @@ package com.amith.query;
  */
 public interface QueryCriterion {
 
-	
+	/**
+	 * 获取查询条件名称
+	 * @return 查询条件名称
+	 */
+	String getPropName();
 	
 }
