@@ -30,7 +30,11 @@ public abstract class AbstractEntity implements Entity {
 	}
 
 	public void setId(String id) {
-		this.id = id;
+		if ("".equals(id)) {
+			this.id = createUUID();
+		} else {
+			this.id = id;
+		}
 	}
 
 	@Version
